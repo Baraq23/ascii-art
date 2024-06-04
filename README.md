@@ -5,14 +5,15 @@
 This project is an ASCII art program implemented in Go. It takes a string as input and outputs a graphic representation of the string using ASCII characters. The output resembles the input string with ASCII characters.
 ### Content
 
-- files/
-    - test/
+- functions/
+    - test_files/
         - standard.txt
         - start_test.go
     - formatspecialcharacters.go
     - printart.go
     - readbanner.go
     - start.go
+    - validatebannerfile.go
     - validate.go
 - go.mod
 - main.go
@@ -20,19 +21,13 @@ This project is an ASCII art program implemented in Go. It takes a string as inp
 - shadow.txt
 - standard.txt
 - thinkertoy.txt
+
 ### Features
 
 - This project is written in go lang.
 - Handles input with ascii values between ascii values 32 to 126, include special characters suchas newline and tab.
 - Uses graphical templates such as standard banner file, shadow banner file and also thinkertoy banner file..
 - Includes test files for testing.
-
-### Banner Formats
-
-The following banner formats are included:
-- `shadow`
-- `standard`
-- `thinkertoy`
 
 ### Usage
 
@@ -96,20 +91,66 @@ __          __         _                                    $
 
 Only standard Go packages are used in this project.
 
-### Contributor
+### How to use the program
+- Strings to be printed must be put in quotation marks.
+```bash
+:~ go run main.go "Hello\n"
+```
+- The following banner formats are included:
+  - `shadow`    -sh
+  - `standard`  -st
+  - `thinkertoy`-th
+ - To use any type the banners above:
+    specify its corresponding flag as follows:
+    -sh, -st and -th respectively.
+
+ _Examples_
+```bash
+:~ go run main.go "Welcome" -th
+
+o       o     o                    
+|       |     |                    
+o   o   o o-o |  o-o o-o o-O-o o-o 
+ \ / \ /  |-' | |    | | | | | |-' 
+  o   o   o-o o  o-o o-o o o o o-o 
+                                   
+:~ go run main.go "Golang" -sh 
+                                                
+  _|_|_|          _|                            
+_|         _|_|   _|   _|_|_| _|_|_|     _|_|_| 
+_|  _|_| _|    _| _| _|    _| _|    _| _|    _| 
+_|    _| _|    _| _| _|    _| _|    _| _|    _| 
+  _|_|_|   _|_|   _|   _|_|_| _|    _|   _|_|_| 
+                                             _| 
+                                         _|_|                           
+```
+
+- Standard banner template will be automatically selected if user has not entered any flag.
+
+### Error handling
+- The program notifies if the template bannerfile is corrupted or empty. In this case the user should download a new banner template from the following links;
+    -  <a href="https://learn.zone01kisumu.ke/git/root/public/src/branch/master/subjects/ascii-art/shadow.txt">shadow</a>
+    - <a href="https://learn.zone01kisumu.ke/git/root/public/src/branch/master/subjects/ascii-art/standard.txt">standard</a>
+    - <a href="https://learn.zone01kisumu.ke/git/root/public/src/branch/master/subjects/ascii-art/thinkertoy.txt">thinkertoy</a> 
+
+  
+### Collaborators
+
 
 <table>
 <tr>
-    <td align="center" style="word-wrap: break-word; width: 150.0; height: 150.0">
-        <a href=https://www.linkedin.com/in/barrack-kope-064a43244?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BtM4PTXbQRFml0XDk5FKlrA%3D%3Dlipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3Buf0Ls4oWR2O2WLUMO5sIBg%3D%3D>
+  <td align="center" style="word-wrap: break-word; width: 150.0; height: 150.0">
+        <a href=https://www.linkedin.com/in/barrack-kope-064a43244/ >
             <img src=https://learn.zone01kisumu.ke/git/avatars/69ae4e7472c685f60beaf04edb53b624?size=870 width="100;"  style="border-radius:50%;align-items:center;justify-content:center;overflow:hidden;padding-top:10px" alt=Aaron/>
             <br />
-            <sub style="font-size:14px"><b>Barrack Otieno </b></sub>
+            <sub style="font-size:14px"><b><i>Barrack Otieno</i></b></sub>
         </a>
-    </td>   
+  </td> 
+  
 </tr>
 
 </table>
+
 
 # Goals
 
@@ -153,7 +194,7 @@ git checkout -b <your_branch_name>
   git commit -m "<your_commit_message>"
 ```
 
-**7.** Push your local branch to the remote repository.
+  Push your local branch to the remote repository.
 
 ```terminal
 git push -u origin <your_branch_name>
@@ -161,12 +202,12 @@ git push -u origin <your_branch_name>
 
 **8.** Create a Pull Request!
 
-**Review** We will review the PR you've made to the codebase of our project.
+**Review:** At this stage, we will review PR and merge your code into our codebase after approval by our team.
 
 ### Issues and Contributions
 
 If you encounter any issues or have suggestions for improvements, feel free to submit an issue or propose a change.
 
-## Enjoy ASCII Art in Go!
+## _____________________
 
 Feel free to explore the codebase, run the program with different inputs, and contribute to enhancing the project.

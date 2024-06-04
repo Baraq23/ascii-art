@@ -2,7 +2,7 @@ package asciiart
 
 import (
 	"testing"
-	asciiart "asciiart/files"
+	asciiart "asciiart/functions"
 )
 	
 

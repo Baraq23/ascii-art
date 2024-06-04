@@ -4,85 +4,61 @@ import (
 	"fmt"
 	"os"
 
-
-	asciiart "asciiart/files"
+	asciiart "asciiart/functions"
 )
 
 func main() {
-	if len(os.Args) == 1 {
-		fmt.Println("Error: Input string not typed")
-		return
-	}
-	if len(os.Args) > 3 {
-		fmt.Println("Error: too many arguments")
-		fmt.Println("Write 'st', 'sh' or 'th' flags for standard, shadow or thinkertoy banner files respectively")
-		return
-	}
-
-	flagFile := ""
-	if len(os.Args) == 2 {
-		flagFile = "standard.txt"
-	}
-	if len(os.Args) == 3 {
-
-		switch os.Args[2] {
-		case "sh":
-			flagFile = "shadow.txt"
-		case "th":
-			flagFile = "thinkertoy.txt"
-		case "st":
-			flagFile = "standard.txt"
-		default:
-			fmt.Println("Write 'st', 'sh' or 'th' flags for standard, shadow or thinkertoy banner files respectively")
-			fmt.Printf("%v is not dfined as a flag standard(st) file has been selected\n", os.Args[2])
-			flagFile = "standard.txt"
-		}
-	}
-	
-	
-	// flagFile := "standard.txt"
-		
 	input := os.Args[1]
-	validated := asciiart.StrValidate(input)
 
-	// if len(os.Args) == 1 {
-	// 	fmt.Println("Error: Input string not typed")
-	// 	return
-	// }
-	// input1 := os.Args[1:]
-	// inputStr := strings.Join(input1, " ")
-	// validated := asciiart.StrValidate(inputStr)
+	validated := asciiart.StrValidate(input)
 
 	if !validated {
 		return
 	}
-	
 
 	input = asciiart.FormatSpChar(input)
 	if input == "" {
 		return
 	}
-	// print newlines
-	nlsOnly := nlsOnly(input)
+	// if string contains New lines only:
+	newLinesOnly := asciiart.NewLinesOnly(input)
 
-	if nlsOnly {
+	if newLinesOnly {
 		for i := 0; i < len(input); i++ {
 			fmt.Println()
 		}
 		return
 	}
-	str := asciiart.Start(input, flagFile)
-	fmt.Sprintln(str)
-}
 
-//check if trings only contains '\n's
-func nlsOnly(input string) bool {
-	for _, v := range input {
-		if v != '\n' {
-			return false
-		} else {
-			continue
+	bannerTemplate := "standard.txt"
+	arguments := os.Args[1:]
+
+	// code checks if the length of the argument is exactly two and the second one is not a flag.
+	if len(arguments) == 2 {
+		flag := os.Args[2]
+		if flag != "-sh" && flag != "-th" && flag != "-st" {
+			fmt.Printf("Error: \"%v\" is not a flag_name. Usage: go run . \"<string>\" <flag_name>\n", flag)
+			return
+		}
+
+		// Handling Flags
+		switch flag {
+		case "-st":
+			bannerTemplate = "standard.txt"
+		case "-sh":
+			bannerTemplate = "shadow.txt"
+		case "-th":
+			bannerTemplate = "thinkertoy.txt"
+		default:
+			bannerTemplate = "standard.txt"
 		}
 	}
-	return true
+	if len(arguments) > 2 {
+		fmt.Println("Error: Too many arguments. Usage: go run . \"<string>\" <flag_name>")
+		return
+	}
+
+	asciiart.ValidateBanner(bannerTemplate)
+	str := asciiart.Start(input, bannerTemplate)
+	fmt.Sprintln(str)
 }

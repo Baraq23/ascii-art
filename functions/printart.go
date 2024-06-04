@@ -4,8 +4,8 @@ import "fmt"
 
 // This function stores the ascii art to then prints the ascii art
 func PrintArt(asciiMap map[rune][]string, input string) string {
-	// slice of a slice to store the Art
-	store := [][]string{}	
+	// 2d slice to store the Art
+	store := [][]string{}
 	for _, chr := range input {
 		store = append(store, asciiMap[chr])
 	}
@@ -19,9 +19,20 @@ func PrintArt(asciiMap map[rune][]string, input string) string {
 			word += "\n"
 		}
 	}
-	// write the Art
+	// write the Art in line.
 	fmt.Println(word)
-	//This return value will be usefeul during testing
+	// This return value will be usefeul during testing
 	return word
+}
 
+// check if trings only contains '\n's
+func NewLinesOnly(input string) bool {
+	for _, v := range input {
+		if v != '\n' {
+			return false
+		} else {
+			continue
+		}
+	}
+	return true
 }
