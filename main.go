@@ -3,11 +3,16 @@ package main
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 
 	asciiart "asciiart/functions"
 )
 
 func main() {
+	if len(os.Args) == 1 {
+		fmt.Println("Error: String not found. Usage: go run . \"<string>\" <flag_name>")
+		return
+	}
 	input := os.Args[1]
 
 	validated := asciiart.StrValidate(input)
@@ -30,27 +35,25 @@ func main() {
 		return
 	}
 
-	bannerTemplate := "standard.txt"
+	bannerTemplate := filepath.Join("banners", "standard.txt")
 	arguments := os.Args[1:]
 
-	// code checks if the length of the argument is exactly two and the second one is not a flag.
+	// Code checks if the length of the argument is exactly two and the second one is not a flag.
 	if len(arguments) == 2 {
 		flag := os.Args[2]
 		if flag != "-sh" && flag != "-th" && flag != "-st" {
-			fmt.Printf("Error: \"%v\" is not a flag_name. Usage: go run . \"<string>\" <flag_name>\n", flag)
+			fmt.Printf("Error: \"%v\" is not a flag_name. Usage: go run . \"<string>\" <flag_name> (flags: -sh, -st, -th)\n", flag)
 			return
 		}
 
 		// Handling Flags
 		switch flag {
-		case "-st":
-			bannerTemplate = "standard.txt"
 		case "-sh":
-			bannerTemplate = "shadow.txt"
+			bannerTemplate = filepath.Join("banners", "shadow.txt")
 		case "-th":
-			bannerTemplate = "thinkertoy.txt"
+			bannerTemplate = filepath.Join("banners", "thinkertoy.txt")
 		default:
-			bannerTemplate = "standard.txt"
+			bannerTemplate = filepath.Join("banners", "standard.txt")
 		}
 	}
 	if len(arguments) > 2 {
@@ -59,6 +62,6 @@ func main() {
 	}
 
 	asciiart.ValidateBanner(bannerTemplate)
-	str := asciiart.Start(input, bannerTemplate)
-	fmt.Sprintln(str)
+	artStringstr := asciiart.WordDistributer(input, bannerTemplate)
+	fmt.Println(artStringstr)
 }
