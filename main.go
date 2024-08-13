@@ -61,7 +61,7 @@ func main() {
 		return
 	}
 
-	asciiart.ValidateBanner(bannerTemplate)
+	// asciiart.ValidateBanner(bannerTemplate)
 	artStringstr := asciiart.WordDistributer(input, bannerTemplate)
 	fmt.Println(artStringstr)
 }
